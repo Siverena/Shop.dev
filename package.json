@@ -1,0 +1,19 @@
+{
+  "name": "shop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Siverena/Shop.git"
+  },
+  "author": "Siverena",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Siverena/Shop/issues"
+  },
+  "homepage": "https://github.com/Siverena/Shop#readme"
+}
