@@ -1,0 +1,95 @@
+.feedback {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 97px;
+    padding-bottom: 126px;
+    &__wrap {
+        background-image: url(../img/subscribe.jpg);
+        background-position: center bottom;
+        background-size: cover;
+    }
+}
+
+.reviews {
+    width: 359px;
+    text-align: center;
+    &__image {
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        background-image: url(../img/reviws.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        margin: 0 auto 30px;
+    }
+}
+
+.subscribe {
+    &__header {
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 18px;
+        line-height: 167.2%;
+        /* or 30px */
+        text-align: center;
+        color: #222224;
+        margin-bottom: 30px;
+        span {
+            display: block;
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 167.2%;
+            /* or 40px */
+            text-align: center;
+            color: #222224;
+        }
+    }
+    &__form {
+        width: 356px;
+        display: flex;
+    }
+    &__input {
+        background: #E1E1E1;
+        padding: 7px 64px 6px 22px;
+        border: none;
+        border-radius: 24px 0 0 24px;
+        font-size: 14px;
+        line-height: 36px;
+        &:active {
+            outline: none;
+        }
+        &:focus {
+            outline: none;
+        }
+        &::placeholder {
+            font-size: 14px;
+            line-height: 36px;
+            color: #222224;
+            opacity: 0.67;
+            text-transform: capitalize;
+        }
+    }
+    &__button {
+        padding: 7px 7px 6px 8px;
+        border-radius: 0 24px 24px 0;
+        border: none;
+        background-color: #F16D7F;
+        font-size: 14px;
+        line-height: 17px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #FFFFFF;
+        transition: background-color 1s;
+        &:active {
+            outline: none;
+        }
+        &:focus {
+            outline: none;
+        }
+        &:hover {
+            background-color: #E05C6E;
+            transition: background-color 1s;
+        }
+    }
+}

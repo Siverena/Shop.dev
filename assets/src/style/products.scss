@@ -1,0 +1,153 @@
+.products {
+    padding-bottom: 95px;
+    &__header {
+        text-align: center;
+        margin-bottom: 48px;
+        &>h2 {
+            font-style: normal;
+            font-weight: normal;
+            font-size: 30px;
+            line-height: 36px;
+            /* identical to box height */
+            color: #222222;
+            margin-bottom: 6px;
+        }
+        &>p {
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 17px;
+            /* identical to box height */
+            color: #9F9F9F;
+        }
+    }
+    &__wrap {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 360px);
+        row-gap: 30px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 48px;
+    }
+    &__show-more {
+        display: block;
+        cursor: pointer;
+        width: fit-content;
+        margin: 0 auto;
+        border: 1px solid #FF6A6A;
+        color: #F26376;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 19px;
+        padding: 15px 39px;
+        background-color: transparent;
+        text-transform: capitalize;
+        text-decoration: none;
+        background-color: transparent;
+        transition: all 2s;
+        &:hover {
+            background-color: #F16D7F;
+            color: #ffffff;
+            transition: all 2s;
+        }
+    }
+    &__item {
+        display: flex;
+    }
+}
+
+.product {
+    width: 360px;
+    background-color: #F8F8F8;
+    display: flex;
+    flex-direction: column;
+    &__image-wrap {
+        position: relative;
+        width: 100%;
+        height: 420px; //считаю, что высота обертки картинки доджна быть фиксированной в целях защиты от дераков. Поправьте, пожалуйста, если это неправильно
+        &:hover {
+            .product__add-to-box-wrap {
+                display: flex;
+            }
+        }
+    }
+    &__add-to-box-wrap {
+        font-family: unset;
+        font-size: unset;
+        text-decoration: none;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: none;
+        z-index: 20;
+        background-color: rgba(58, 56, 56, 0.86);
+        top: 0;
+        left: 0;
+    }
+    &__add-to-box-btn {
+        border: 1px solid #ffffff;
+        padding: 15px 13px 17px 51px;
+        display: block;
+        position: relative;
+        margin: auto;
+        font-size: 14px;
+        line-height: 17px;
+        /* identical to box height */
+        color: #FFFFFF;
+        background-color: transparent;
+        transition: all 2s;
+        &::before {
+            position: absolute;
+            display: block;
+            content: "";
+            width: 26px;
+            height: 24px;
+            background-image: url(../img/box.svg);
+            background-size: auto;
+            background-repeat: no-repeat;
+            background-position: center;
+            left: 12px;
+            top: 12px;
+        }
+        &:hover {
+            background-color: #F16D7F;
+            transition: all 2s;
+        }
+    }
+    &__footer {
+        padding: 25px 28px 20px 16px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+    &__name {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 16px;
+        text-transform: uppercase;
+        color: #000000;
+        margin-bottom: 13px;
+    }
+    &__link {
+        color: inherit;
+        text-decoration: none;
+    }
+    &__description {
+        font-style: normal;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 17px;
+        color: #5D5D5D;
+        margin-bottom: 18px;
+    }
+    &__price {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 19px;
+        color: #F16D7F;
+        margin-top: auto;
+    }
+}
