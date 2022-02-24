@@ -1,0 +1,37 @@
+.breadcrumbs {
+    &__list {
+        display: flex;
+        text-transform: uppercase;
+    }
+    &__item {
+        &::after {
+            display: inline;
+            content: "/";
+            color: #636363;
+            margin-left: 3px;
+            margin-right: 3px;
+        }
+        &:last-of-type {
+            color: #F16D7F;
+            font-weight: bold;
+            &::after {
+                display: none;
+            }
+        }
+    }
+    &__link {
+        font-size: 14px;
+        line-height: 17px;
+        color: #636363;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    // .breadcrumbs {
+    //     margin-top: 32px;
+    // }
+}

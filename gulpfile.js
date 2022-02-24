@@ -1,17 +1,19 @@
 'use strict';
 
-/* РїСѓС‚Рё Рє РёСЃС…РѕРґРЅС‹Рј С„Р°Р№Р»Р°Рј (src), Рє РіРѕС‚РѕРІС‹Рј С„Р°Р№Р»Р°Рј (build), Р° С‚Р°РєР¶Рµ Рє С‚РµРј, Р·Р° РёР·РјРµРЅРµРЅРёСЏРјРё РєРѕС‚РѕСЂС‹С… РЅСѓР¶РЅРѕ РЅР°Р±Р»СЋРґР°С‚СЊ (watch) */
+/* пути к исходным файлам (src), к готовым файлам (build), а также к тем, за изменениями которых нужно наблюдать (watch) */
 var path = {
     build: {
         html: 'assets/build/',
         js: 'assets/build/js/',
+        jsmodules: 'assets/build/js/modules',
         css: 'assets/build/css/',
         img: 'assets/build/img/',
         fonts: 'assets/build/fonts/'
     },
     src: {
-        html: 'assets/src/*.html',
+        html: ['assets/src/*.html', '!assets/src/**/_*.html'],
         js: 'assets/src/js/main.js',
+        jsmodules: 'assets/src/js/modules/productsdata.js',
         style: 'assets/src/style/main.scss',
         img: 'assets/src/img/**/*.*',
         fonts: 'assets/src/fonts/**/*.*'
@@ -19,14 +21,15 @@ var path = {
     watch: {
         html: 'assets/src/**/*.html',
         js: 'assets/src/js/**/*.js',
+        jsmodules: 'assets/src/js/modules/productsdata.js',
         css: 'assets/src/style/**/*.scss',
         img: 'assets/src/img/**/*.*',
-        fonts: 'assets/srs/fonts/**/*.*'
+        fonts: 'assets/src/fonts/**/*.*'
     },
     clean: './assets/build/*'
 };
 
-/* РЅР°СЃС‚СЂРѕР№РєРё СЃРµСЂРІРµСЂР° */
+/* настройки сервера */
 var config = {
     server: {
         baseDir: './assets/build'
@@ -34,95 +37,100 @@ var config = {
     notify: false
 };
 
-/* РїРѕРґРєР»СЋС‡Р°РµРј gulp Рё РїР»Р°РіРёРЅС‹ */
-var gulp = require('gulp'), // РїРѕРґРєР»СЋС‡Р°РµРј Gulp
-    webserver = require('browser-sync'), // СЃРµСЂРІРµСЂ РґР»СЏ СЂР°Р±РѕС‚С‹ Рё Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ РѕР±РЅРѕРІР»РµРЅРёСЏ СЃС‚СЂР°РЅРёС†
-    plumber = require('gulp-plumber'), // РјРѕРґСѓР»СЊ РґР»СЏ РѕС‚СЃР»РµР¶РёРІР°РЅРёСЏ РѕС€РёР±РѕРє
-    rigger = require('gulp-rigger'), // РјРѕРґСѓР»СЊ РґР»СЏ РёРјРїРѕСЂС‚Р° СЃРѕРґРµСЂР¶РёРјРѕРіРѕ РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р° РІ РґСЂСѓРіРѕР№
-    sourcemaps = require('gulp-sourcemaps'), // РјРѕРґСѓР»СЊ РґР»СЏ РіРµРЅРµСЂР°С†РёРё РєР°СЂС‚С‹ РёСЃС…РѕРґРЅС‹С… С„Р°Р№Р»РѕРІ
-    sass = require('gulp-sass'), // РјРѕРґСѓР»СЊ РґР»СЏ РєРѕРјРїРёР»СЏС†РёРё SASS (SCSS) РІ CSS
-    autoprefixer = require('gulp-autoprefixer'), // РјРѕРґСѓР»СЊ РґР»СЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕР№ СѓСЃС‚Р°РЅРѕРІРєРё Р°РІС‚РѕРїСЂРµС„РёРєСЃРѕРІ
-    cleanCSS = require('gulp-clean-css'), // РїР»Р°РіРёРЅ РґР»СЏ РјРёРЅРёРјРёР·Р°С†РёРё CSS
-    uglify = require('gulp-uglify-es').default, // РјРѕРґСѓР»СЊ РґР»СЏ РјРёРЅРёРјРёР·Р°С†РёРё JavaScript
-    cache = require('gulp-cache'), // РјРѕРґСѓР»СЊ РґР»СЏ РєСЌС€РёСЂРѕРІР°РЅРёСЏ
-    imagemin = require('gulp-imagemin'), // РїР»Р°РіРёРЅ РґР»СЏ СЃР¶Р°С‚РёСЏ PNG, JPEG, GIF Рё SVG РёР·РѕР±СЂР°Р¶РµРЅРёР№
-    jpegrecompress = require('imagemin-jpeg-recompress'), // РїР»Р°РіРёРЅ РґР»СЏ СЃР¶Р°С‚РёСЏ jpeg	
-    pngquant = require('imagemin-pngquant'), // РїР»Р°РіРёРЅ РґР»СЏ СЃР¶Р°С‚РёСЏ png
-    rimraf = require('gulp-rimraf'), // РїР»Р°РіРёРЅ РґР»СЏ СѓРґР°Р»РµРЅРёСЏ С„Р°Р№Р»РѕРІ Рё РєР°С‚Р°Р»РѕРіРѕРІ
+/* подключаем gulp и плагины */
+var gulp = require('gulp'), // подключаем Gulp
+    webserver = require('browser-sync'), // сервер для работы и автоматического обновления страниц
+    plumber = require('gulp-plumber'), // модуль для отслеживания ошибок
+    rigger = require('gulp-rigger'), // модуль для импорта содержимого одного файла в другой
+    sourcemaps = require('gulp-sourcemaps'), // модуль для генерации карты исходных файлов
+    sass = require('gulp-sass'), // модуль для компиляции SASS (SCSS) в CSS
+    autoprefixer = require('gulp-autoprefixer'), // модуль для автоматической установки автопрефиксов
+    cleanCSS = require('gulp-clean-css'), // плагин для минимизации CSS
+    uglify = require('gulp-uglify-es').default, // модуль для минимизации JavaScript
+    cache = require('gulp-cache'), // модуль для кэширования
+    imagemin = require('gulp-imagemin'), // плагин для сжатия PNG, JPEG, GIF и SVG изображений
+    jpegrecompress = require('imagemin-jpeg-recompress'), // плагин для сжатия jpeg	
+    pngquant = require('imagemin-pngquant'), // плагин для сжатия png
+    rimraf = require('gulp-rimraf'), // плагин для удаления файлов и каталогов
     fileinclude = require('gulp-file-include'),
     rename = require('gulp-rename');
 
-/* Р·Р°РґР°С‡Рё */
+/* задачи */
 
 
 
-
-
-
-
-
-
-
-
-
-// Р·Р°РїСѓСЃРє СЃРµСЂРІРµСЂР°
+// запуск сервера
 gulp.task('webserver', function() {
     webserver(config);
 });
 
-// СЃР±РѕСЂ html
+// сбор html
 gulp.task('html:build', function() {
-    return gulp.src(path.src.html) // РІС‹Р±РѕСЂ РІСЃРµС… html С„Р°Р№Р»РѕРІ РїРѕ СѓРєР°Р·Р°РЅРЅРѕРјСѓ РїСѓС‚Рё
-        .pipe(plumber()) // РѕС‚СЃР»РµР¶РёРІР°РЅРёРµ РѕС€РёР±РѕРє
-        .pipe(rigger()) // РёРјРїРѕСЂС‚ РІР»РѕР¶РµРЅРёР№
+
+    return gulp.src(path.src.html) // выбор всех html файлов по указанному пути
+        .pipe(plumber()) // отслеживание ошибок
+        .pipe(rigger()) // импорт вложений
         .pipe(fileinclude({
             prefix: '@@',
             basepath: '@file'
         }))
-        .pipe(gulp.dest(path.build.html)) // РІС‹РєР»Р°РґС‹РІР°РЅРёРµ РіРѕС‚РѕРІС‹С… С„Р°Р№Р»РѕРІ
-        .pipe(webserver.reload({ stream: true })); // РїРµСЂРµР·Р°РіСЂСѓР·РєР° СЃРµСЂРІРµСЂР°
+        .pipe(gulp.dest(path.build.html)) // выкладывание готовых файлов
+        .pipe(webserver.reload({ stream: true })); // перезагрузка сервера
 });
 
 
-// СЃР±РѕСЂ СЃС‚РёР»РµР№
+// сбор стилей
 gulp.task('css:build', function() {
-    return gulp.src(path.src.style) // РїРѕР»СѓС‡РёРј main.scss
-        .pipe(plumber()) // РґР»СЏ РѕС‚СЃР»РµР¶РёРІР°РЅРёСЏ РѕС€РёР±РѕРє
-        .pipe(sourcemaps.init()) // РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј sourcemap
+    return gulp.src(path.src.style) // получим main.scss
+        .pipe(plumber()) // для отслеживания ошибок
+        .pipe(sourcemaps.init()) // инициализируем sourcemap
         .pipe(sass()) // scss -> css
-        .pipe(autoprefixer()) // РґРѕР±Р°РІРёРј РїСЂРµС„РёРєСЃС‹
+        .pipe(autoprefixer()) // добавим префиксы
         .pipe(gulp.dest(path.build.css))
         .pipe(rename({ suffix: '.min' }))
-        .pipe(cleanCSS()) // РјРёРЅРёРјРёР·РёСЂСѓРµРј CSS
-        .pipe(sourcemaps.write('./')) // Р·Р°РїРёСЃС‹РІР°РµРј sourcemap
-        .pipe(gulp.dest(path.build.css)) // РІС‹РіСЂСѓР¶Р°РµРј РІ build
-        .pipe(webserver.reload({ stream: true })); // РїРµСЂРµР·Р°РіСЂСѓР·РёРј СЃРµСЂРІРµСЂ
+        .pipe(cleanCSS()) // минимизируем CSS
+        .pipe(sourcemaps.write('./')) // записываем sourcemap
+        .pipe(gulp.dest(path.build.css)) // выгружаем в build
+        .pipe(webserver.reload({ stream: true })); // перезагрузим сервер
 });
 
-// СЃР±РѕСЂ js
+// сбор js
 gulp.task('js:build', function() {
-    return gulp.src(path.src.js) // РїРѕР»СѓС‡РёРј С„Р°Р№Р» main.js
-        .pipe(plumber()) // РґР»СЏ РѕС‚СЃР»РµР¶РёРІР°РЅРёСЏ РѕС€РёР±РѕРє
-        .pipe(rigger()) // РёРјРїРѕСЂС‚РёСЂСѓРµРј РІСЃРµ СѓРєР°Р·Р°РЅРЅС‹Рµ С„Р°Р№Р»С‹ РІ main.js
+    return gulp.src(path.src.js) // получим файл main.js
+        .pipe(plumber()) // для отслеживания ошибок
+        .pipe(rigger()) // импортируем все указанные файлы в main.js
         .pipe(gulp.dest(path.build.js))
         .pipe(rename({ suffix: '.min' }))
-        .pipe(sourcemaps.init()) //РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј sourcemap
-        .pipe(uglify()) // РјРёРЅРёРјРёР·РёСЂСѓРµРј js
-        .pipe(sourcemaps.write('./')) //  Р·Р°РїРёСЃС‹РІР°РµРј sourcemap
-        .pipe(gulp.dest(path.build.js)) // РїРѕР»РѕР¶РёРј РіРѕС‚РѕРІС‹Р№ С„Р°Р№Р»
-        .pipe(webserver.reload({ stream: true })); // РїРµСЂРµР·Р°РіСЂСѓР·РёРј СЃРµСЂРІРµСЂ
+        .pipe(sourcemaps.init()) //инициализируем sourcemap
+        .pipe(uglify()) // минимизируем js
+        .pipe(sourcemaps.write('./')) //  записываем sourcemap
+        .pipe(gulp.dest(path.build.js)) // положим готовый файл
+        .pipe(webserver.reload({ stream: true })); // перезагрузим сервер
 });
 
-// РїРµСЂРµРЅРѕСЃ С€СЂРёС„С‚РѕРІ
+gulp.task('jsmodules:build', function() {
+    return gulp.src(path.src.jsmodules) // получим файл .js
+        .pipe(plumber()) // для отслеживания ошибок
+        .pipe(rigger()) // импортируем все указанные файлы в .js
+        .pipe(gulp.dest(path.build.jsmodules))
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(sourcemaps.init()) //инициализируем sourcemap
+        .pipe(uglify()) // минимизируем js
+        .pipe(sourcemaps.write('./')) //  записываем sourcemap
+        .pipe(gulp.dest(path.build.jsmodules)) // положим готовый файл
+        .pipe(webserver.reload({ stream: true })); // перезагрузим сервер
+});
+
+// перенос шрифтов
 gulp.task('fonts:build', function() {
     return gulp.src(path.src.fonts)
         .pipe(gulp.dest(path.build.fonts));
 });
 
-// РѕР±СЂР°Р±РѕС‚РєР° РєР°СЂС‚РёРЅРѕРє
+// обработка картинок
 gulp.task('image:build', function() {
-    return gulp.src(path.src.img) // РїСѓС‚СЊ СЃ РёСЃС…РѕРґРЅРёРєР°РјРё РєР°СЂС‚РёРЅРѕРє
-        .pipe(cache(imagemin([ // СЃР¶Р°С‚РёРµ РёР·РѕР±СЂР°Р¶РµРЅРёР№
+    return gulp.src(path.src.img) // путь с исходниками картинок
+        .pipe(cache(imagemin([ // сжатие изображений
             imagemin.gifsicle({ interlaced: true }),
             jpegrecompress({
                 progressive: true,
@@ -132,43 +140,45 @@ gulp.task('image:build', function() {
             pngquant(),
             imagemin.svgo({ plugins: [{ removeViewBox: false }] })
         ])))
-        .pipe(gulp.dest(path.build.img)); // РІС‹РіСЂСѓР·РєР° РіРѕС‚РѕРІС‹С… С„Р°Р№Р»РѕРІ
+        .pipe(gulp.dest(path.build.img)); // выгрузка готовых файлов
 });
 
-// СѓРґР°Р»РµРЅРёРµ РєР°С‚Р°Р»РѕРіР° build 
+// удаление каталога build 
 gulp.task('clean:build', function() {
     return gulp.src(path.clean, { read: false })
         .pipe(rimraf());
 });
 
-// РѕС‡РёСЃС‚РєР° РєСЌС€Р°
+// очистка кэша
 gulp.task('cache:clear', function() {
     cache.clearAll();
 });
 
-// СЃР±РѕСЂРєР°
+// сборка
 gulp.task('build',
     gulp.series('clean:build',
         gulp.parallel(
             'html:build',
             'css:build',
             'js:build',
+            'jsmodules:build',
             'fonts:build',
             'image:build'
         )
     )
 );
 
-// Р·Р°РїСѓСЃРє Р·Р°РґР°С‡ РїСЂРё РёР·РјРµРЅРµРЅРёРё С„Р°Р№Р»РѕРІ
+// запуск задач при изменении файлов
 gulp.task('watch', function() {
     gulp.watch(path.watch.html, gulp.series('html:build'));
     gulp.watch(path.watch.css, gulp.series('css:build'));
     gulp.watch(path.watch.js, gulp.series('js:build'));
+    gulp.watch(path.watch.jsmodules, gulp.series('jsmodules:build'));
     gulp.watch(path.watch.img, gulp.series('image:build'));
     gulp.watch(path.watch.fonts, gulp.series('fonts:build'));
 });
 
-// Р·Р°РґР°С‡Р° РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
+// задача по умолчанию
 gulp.task('default', gulp.series(
     'build',
     gulp.parallel('webserver', 'watch')

@@ -1,0 +1,371 @@
+@mixin button-style($color, $bgc, $border, $bgc-h, $bgc-a, $bgc-f, $color-hover: inherit) {
+    padding: 15px 37px;
+    text-transform: uppercase;
+    text-align: center;
+    border: none;
+    // color: #fff;
+    // background-color: #F16D7F;
+    color: $color;
+    background-color: $bgc;
+    border: $border;
+    transition: background-color 1s, color 1s;
+    &:hover {
+        // background-color: #e05c6e;
+        background-color: $bgc-h;
+        transition: all 1s;
+        color: $color-hover;
+    }
+    &:active {
+        // background-color: #bd0f26;
+        background-color: $bgc-a;
+        color: $color-hover;
+    }
+    &:focus {
+        // background-color: #bd0f26;
+        background-color: $bgc-f;
+        color: $color-hover;
+    }
+}
+
+.cart-page {
+    padding: 96px 0 128px;
+    &__form {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.cart {
+    margin-bottom: 72px;
+    &__button-wrap {
+        display: flex;
+        justify-content: space-between;
+    }
+    &__button {
+        text-decoration: none;
+        @include button-style(#000000, transparent, 1px solid #A4A4A4, #f16d7f, #bd0f26, #f16d7f, #ffffff);
+    }
+}
+
+.goods {
+    font-size: 22px;
+    line-height: 26px;
+    color: #575757;
+    display: flex;
+    box-shadow: 17px 19px 24px rgba(0, 0, 0, 0.13);
+    width: 652px;
+    position: relative;
+    margin-bottom: 40px;
+    &__description {
+        padding: 23px 89px 62px 31px;
+        display: flex;
+        flex-direction: column;
+        width: 390px;
+    }
+    &__name {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 29px;
+        color: #222222;
+        text-transform: uppercase;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    &__input-wrap {
+        display: flex;
+        width: fit-content;
+        align-items: center;
+        input {
+            border: 1px solid #EAEAEA;
+            padding: 1px 1px;
+            margin-left: 31px;
+            width: 44px;
+            height: 25px;
+            font: inherit;
+            font-size: 18px;
+            line-height: 22px;
+            color: #656565;
+            box-sizing: border-box;
+            text-align: center;
+            &::-webkit-inner-spin-button,
+            &::-webkit-outer-spin-button {
+                height: auto;
+                display: none;
+            }
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+    &__text {
+        margin-bottom: 6px;
+        span {
+            color: #6F6E6E;
+            text-transform: uppercase;
+        }
+        &--price {
+            margin-top: auto;
+            span {
+                color: #EF5B70;
+            }
+        }
+    }
+    &__delete {
+        display: block;
+        width: 18px;
+        height: 18px;
+        position: absolute;
+        right: 24px;
+        top: 27px;
+        background-color: transparent;
+        border: none;
+        &:active {
+            outline: none;
+        }
+        &:focus {
+            outline: none;
+        }
+        &:hover::before {
+            background-color: #EF5B70;
+        }
+        &:active::before {
+            outline: none;
+            background-color: #bd0f26;
+        }
+        &:focus::before {
+            outline: none;
+            background-color: #bd0f26;
+        }
+        &:hover::after {
+            background-color: #EF5B70;
+        }
+        &:active::after {
+            outline: none;
+            background-color: #bd0f26;
+        }
+        &:focus::after {
+            outline: none;
+            background-color: #bd0f26;
+        }
+        &:before {
+            display: block;
+            content: "";
+            width: 23px;
+            height: 3px;
+            background-color: #6F6E6E;
+            transform: rotate(135deg);
+            border-radius: 4px;
+            position: absolute;
+            left: 0px;
+            right: 0;
+        }
+        &:after {
+            display: block;
+            content: "";
+            width: 23px;
+            height: 3px;
+            background-color: #6F6E6E;
+            transform: rotate(45deg);
+            border-radius: 4px;
+            position: absolute;
+            left: 0px;
+            right: 0;
+        }
+    }
+}
+
+.shipping {
+    width: 358px;
+    margin-bottom: 57px;
+    &__header {
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 19px;
+        color: #222222;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        margin-top: 18px;
+    }
+    &__input {
+        width: 100%;
+        padding: 13px 17px;
+        font-weight: 300;
+        font-size: 13px;
+        line-height: 16px;
+        /* identical to box height */
+        color: #222222;
+        border: 1px solid #A4A4A4;
+        margin-bottom: 22px;
+        &::placeholder {
+            color: #B1B1B1;
+        }
+    }
+    &__button {
+        color: #4A4A4A;
+        text-transform: uppercase;
+        /////////////////////// $color, $bgc, $border, $bgc-h, $bgc-a, $bgc-f, $color-hover: inherit
+        @include button-style(#4A4A4A, transparent, 1px solid #A4A4A4, #e05c6e, #bd0f26, #bd0f26, #ffffff);
+        padding: 10px 14px;
+        font-weight: 300;
+        font-size: 11px;
+        line-height: 13px;
+    }
+}
+
+.checkout {
+    text-align: right;
+    width: 358px;
+    padding: 39px 37px 42px 44px;
+    background-color: #F5F3F3;
+    text-transform: uppercase;
+    &__sub {
+        font-size: 11px;
+        line-height: 13px;
+        color: #4A4A4A;
+        margin-bottom: 12px;
+        span {
+            margin-left: 26px;
+        }
+    }
+    &__grand {
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 19px;
+        color: #222222;
+        margin-bottom: 21px;
+        span {
+            color: #F16D7F;
+            margin-left: 26px;
+        }
+    }
+    &__line {
+        background-color: #E2E2E2;
+        margin-bottom: 17px;
+    }
+    &__button {
+        width: 100%;
+        transition: background-color 1s;
+        @include button-style(#ffffff, #F16D7F, none, #e05c6e, #bd0f26, #bd0f26, #ffffff);
+    }
+}
+
+@media (max-width: 1200px) {
+    .cart-page {
+        padding: 59px 0 69px;
+        &__form {
+            display: block;
+        }
+        &__item-list {
+            margin-bottom: 34px;
+        }
+    }
+    .cart {
+        margin-bottom: 62px;
+        &__button-wrap {
+            justify-content: center;
+        }
+        &__button {
+            margin: 0 24px;
+        }
+    }
+    .goods {
+        width: 100%;
+    }
+    .quote {
+        display: flex;
+        justify-content: space-between;
+    }
+    .checkout {
+        align-self: flex-start;
+        margin-top: 69px;
+    }
+    .shipping {
+        &__header {
+            margin-bottom: 20px;
+            margin-top: 31px;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .cart-page {
+        padding: 41px 0 101px;
+    }
+    .cart {
+        margin-bottom: 20px;
+        &__button-wrap {
+            justify-content: space-between;
+        }
+        &__button {
+            text-transform: none;
+            padding: 9px 18px;
+            margin: 0 3px;
+            font-size: 12px;
+            line-height: 14px;
+            flex-grow: 1;
+        }
+    }
+    .quote {
+        display: block;
+    }
+    .goods {
+        margin-bottom: 30px;
+        &__img {
+            width: 143px;
+            height: 188px;
+        }
+        &__description {
+            padding: 14px 53px 37px 17px;
+        }
+        &__name {
+            font-size: 16px;
+            line-height: 19px;
+        }
+        &__text {
+            font-size: 14px;
+            line-height: 17px;
+            margin-bottom: 3px;
+        }
+        &__input-wrap {
+            font-size: 14px;
+            line-height: 17px;
+            input {
+                width: 25px;
+                height: 15px;
+                font-size: 10px;
+                line-height: 12px;
+            }
+        }
+        &__delete {
+            width: 10px;
+            height: 12px;
+            right: 15px;
+            top: 16px;
+            &:before {
+                width: 14px;
+                height: 2px;
+                border-radius: 2px;
+            }
+            &:after {
+                width: 14px;
+                height: 2px;
+                border-radius: 2px;
+            }
+        }
+    }
+    .shipping {
+        width: 100%;
+        margin-bottom: 20px;
+        &__header {
+            margin-top: 46px;
+        }
+    }
+    .checkout {
+        margin-top: 50px;
+        width: 100%;
+        min-width: 358px;
+    }
+}

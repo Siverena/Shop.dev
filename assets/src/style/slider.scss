@@ -1,0 +1,188 @@
+.item {
+    &__header {
+        text-transform: uppercase;
+    }
+    &__description {
+        border: 1px solid #EAEAEA;
+        padding: 65px 250px;
+        z-index: 40;
+        position: relative;
+        top: -65px;
+        z-index: 10;
+        background-color: #ffffff;
+        text-align: center;
+        margin-bottom: 60px;
+    }
+    &__category {
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 17px;
+        color: #F16D7F;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 27px;
+        &::after {
+            display: block;
+            content: "";
+            width: 63px;
+            height: 3px;
+            background-color: #EF5B70;
+            position: relative;
+            bottom: -12px;
+        }
+    }
+    &__name {
+        font-weight: 300;
+        font-size: 18px;
+        line-height: 22px;
+        color: #4D4D4D;
+        margin-bottom: 49px;
+    }
+    &__text {
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 17px;
+        text-align: center;
+        color: #5E5E5E;
+        margin-bottom: 33px;
+    }
+    &__cost {
+        font-weight: 300;
+        font-size: 24px;
+        line-height: 29px;
+        color: #EF5B70;
+        margin-bottom: 60px;
+    }
+    &__line {
+        background-color: #EAEAEA;
+    }
+    &__add-to-box-btn {
+        border: 1px solid #EF5B70;
+        color: #EF5B70;
+        padding: 11px 44px 12px 73px;
+        background-color: transparent;
+        position: relative;
+        text-align: center;
+        transition: all 1s;
+        display: flex;
+        margin: 0 auto;
+        align-items: center;
+        justify-content: center;
+        &:hover {
+            border-color: #ffffff;
+            color: #ffffff;
+            background-color: #EF5B70;
+            svg {
+                fill: #ffffff;
+            }
+        }
+        svg {
+            fill: #EF5B70;
+            position: relative;
+            left: -50px;
+            transition: all 1s;
+        }
+    }
+}
+
+.slider {
+    height: 777px;
+    background-color: #F7F7F7;
+    position: relative;
+    min-width: 375px;
+    &__item__cont {
+        position: relative;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    &__item {
+        display: none;
+        &--active {
+            display: block;
+        }
+    }
+    &__image {
+        margin: 0 auto;
+        width: 597px;
+        height: 724px;
+        display: block;
+    }
+    &__link {
+        width: 47px;
+        position: absolute;
+        top: (777px/2)-(47px/2);
+        cursor: pointer;
+        &:hover {
+            path {
+                fill: #F16D7F;
+            }
+        }
+        &--prew {
+            left: 0;
+        }
+        &--next {
+            right: 0;
+        }
+    }
+    &__btn {
+        width: 47px;
+        height: 47px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(42, 42, 42, 0.15);
+    }
+}
+
+@media (max-width: 1200px) {
+    .slider {
+        height: 624px;
+        &__image {
+            width: 466px;
+            height: 565px;
+        }
+        &__link {
+            top: (624px/2)-(47px/2);
+        }
+    }
+    .item {
+        &__description {
+            top: 0;
+            padding: 65px 105px;
+            margin: 0 -17px 125px;
+            &+.products__wrap .product:last-child {
+                display: none;
+            }
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .slider {
+        &__image {
+            width: 374px;
+            height: 454px;
+        }
+        &__link {
+            top: (624px/2)-(47px/2);
+        }
+    }
+    .item {
+        &__description {
+            padding: 64px 24px;
+            margin: 0 -7px 64px;
+        }
+        &__cost {
+            margin-bottom: 31px;
+        }
+        &__line {
+            width: 174px;
+            margin: 0 auto;
+        }
+    }
+}

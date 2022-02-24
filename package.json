@@ -9,7 +9,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Siverena/Shop.git"
+        "url": "git+https://github.com/Siverena/Shop.dev.git"
     },
     "author": "Siverena",
     "license": "ISC",
@@ -17,6 +17,10 @@
         "url": "https://github.com/Siverena/Shop/issues"
     },
     "devDependencies": {
+        "@babel/cli": "^7.17.6",
+        "@babel/core": "^7.17.5",
+        "@babel/node": "^7.16.8",
+        "@babel/preset-env": "^7.16.11",
         "browser-sync": "^2.27.5",
         "gulp": "^4.0.2",
         "gulp-autoprefixer": "^8.0.0",
@@ -44,5 +48,5 @@
         "> 1%",
         "IE 10"
     ],
-    "homepage": "https://github.com/Siverena/Shop#readme"
+    "homepage": "https://github.com/Siverena/Shop.dev#readme"
 }
