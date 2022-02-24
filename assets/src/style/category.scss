@@ -1,0 +1,48 @@
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 64px;
+    justify-content: space-between;
+    margin-bottom: 96px;
+}
+
+.category {
+    width: 360px;
+    display: flex;
+    margin-bottom: 31px;
+    padding: 106px 103px;
+    background-color: #C4C4C4;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    &--women {
+        background-image: url(../img/women.jpg);
+    }
+    &--men {
+        background-image: url(../img/men.jpg);
+    }
+    &--kids {
+        background-image: url(../img/kids.jpg);
+    }
+    &--acces {
+        background-image: url(../img/acces.jpg);
+        width: 100%;
+        padding: 65px 0;
+    }
+    &__name {
+        margin: auto;
+        font-size: 16px;
+        line-height: 19px;
+        text-align: center;
+        color: #ffffff;
+        font-style: normal;
+        font-weight: normal;
+        span {
+            display: block;
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 29px;
+            color: #F16D7F;
+        }
+    }
+}
