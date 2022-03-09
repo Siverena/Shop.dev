@@ -2,29 +2,55 @@
     display: flex;
     justify-content: space-between;
     padding-top: 97px;
-    padding-bottom: 126px;
+    padding-bottom: 151px;
+    position: relative;
+    z-index: 10;
     &__wrap {
-        background-image: url(../img/subscribe.jpg);
-        background-position: center bottom;
-        background-size: cover;
+        // background-image: url(../img/subscribe-bg.jpg);
+        // background-position: center bottom;
+        // background-size: cover;
+        position: relative;
+        overflow: hidden;
+    }
+    &__video {
+        width: 100%;
+        // height: 100%;
+        margin: 0 auto;
+        position: absolute;
+        bottom: 0;
+        z-index: 1;
+        filter: grayscale(100%)
     }
 }
 
 .reviews {
-    width: 359px;
+    width: 360px;
     text-align: center;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    color: #222224;
     &__image {
+        margin: 0 auto 30px;
         width: 96px;
         height: 96px;
         border-radius: 50%;
-        background-image: url(../img/reviws.png);
+        background-color: #c4c4c4;
+        background-image: url(../img/avatar.jpg);
         background-repeat: no-repeat;
         background-position: center;
-        margin: 0 auto 30px;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        position: relative;
+        left: -11px;
     }
 }
 
 .subscribe {
+    max-width: 557px;
+    margin-right: 104px;
+    padding-top: 55px;
     &__header {
         text-align: center;
         text-transform: uppercase;
@@ -33,7 +59,7 @@
         /* or 30px */
         text-align: center;
         color: #222224;
-        margin-bottom: 30px;
+        margin-bottom: 25px;
         span {
             display: block;
             font-weight: bold;
@@ -42,15 +68,17 @@
             /* or 40px */
             text-align: center;
             color: #222224;
+            margin-bottom: -4px
         }
     }
     &__form {
         width: 356px;
         display: flex;
+        margin: 0 -7px 0 0;
     }
     &__input {
         background: #E1E1E1;
-        padding: 7px 64px 6px 22px;
+        padding: 7px 65px 6px 20px;
         border: none;
         border-radius: 24px 0 0 24px;
         font-size: 14px;
@@ -70,7 +98,8 @@
         }
     }
     &__button {
-        padding: 7px 7px 6px 8px;
+        width: 100px;
+        padding: 7px 7px 6px 18px;
         border-radius: 0 24px 24px 0;
         border: none;
         background-color: #F16D7F;
@@ -90,6 +119,53 @@
         &:hover {
             background-color: #E05C6E;
             transition: background-color 1s;
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    .feedback {
+        padding-top: 65px;
+        padding-bottom: 140px;
+        display: block;
+        &__video {
+            width: 200%;
+        }
+    }
+    .reviews {
+        margin: 0 auto;
+        margin-bottom: 19px;
+    }
+    .subscribe {
+        margin: 0 auto;
+        &__header {
+            margin-bottom: 20px;
+        }
+        &__form {
+            margin: 0 auto;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .subscribe {
+        padding-top: 39px;
+        &__header {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+    }
+    .feedback {
+        padding-bottom: 108px;
+        &__video {
+            width: 300%;
+        }
+    }
+    .reviews {
+        &__image {
+            width: 92px;
+            height: 92px;
+            margin-bottom: 28px;
         }
     }
 }

@@ -1,0 +1,55 @@
+@@include('_head.html', {"title": "cart-page"})
+
+<body>
+    @@include('_header.html')
+    <main class="content ">
+
+        @@include('_page-head.html', {"h1":"shopping cart", "breadcrumbs": false})
+        <div class="container">
+            <section class="cart-page">
+                <form class="cart-page__form">
+                    <div class="cart-page__item-list ">
+                        <ul class="cart">
+                            <template id="cart__item">
+                            <li class="cart__item goods">
+                                <img src="img/cart/goods-2.jpg" width="262" height="306" alt="mango  people t-shirt" class="goods__img">
+                                <div class="goods__description">
+                                    <a class="goods__name" href="product-page.html">mango  people t&#8209;shirt</a>
+                                    <p class="goods__text goods__text--price">Price: <span>$300 </span> </p>
+                                    <p class="goods__text">Color: <span>Red</span> </p>
+                                    <p class="goods__text">Size: <span>Xl</span> </p>
+                                    <div class="goods__input-wrap">
+                                        <label class="goods__quantity" for="quantity2">Quantity:</label>
+                                        <input id="quantity2" name="quantity2" type="number">
+                                    </div>
+                                    <button class="goods__delete"><span class="visually-hidden">Удалить</span></button>
+                                </div>
+                            </li>
+                        </template>
+                        </ul>
+                        <div class="cart__button-wrap">
+                            <button class="cart__button" id="clear-cart-btn">Clear shopping cart</button>
+                            <a href="catalog-page.html" class="cart__button">Continue shopping</a>
+                        </div>
+                    </div>
+                    <div class="quote">
+                        <div class="quote__item shipping">
+                            <h3 class="shipping__header">shipping adress</h3>
+                            <input type="text" name="town" placeholder="Bangladesh" class="shipping__input">
+                            <input type="text" name="state" placeholder="State" class="shipping__input">
+                            <input type="text" name="postcode" placeholder="Postcode / Zip" class="shipping__input">
+                            <button class="shipping__button" type="submit">get a quote</button>
+                        </div>
+                        <div class="quote__item checkout">
+                            <p class="checkout__sub">sub total <span>$0</span></p>
+                            <p class="checkout__grand">grand total<span>$0</span></p>
+                            <hr class="checkout__line">
+                            <button class="checkout__button" type="submit" id="checkout__button"> proceed to checkout</button>
+                        </div>
+                    </div>
+
+                </form>
+            </section>
+        </div>
+    </main>
+    @@include('_footer.html')

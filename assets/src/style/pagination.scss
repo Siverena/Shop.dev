@@ -1,0 +1,47 @@
+.pagination {
+    display: flex;
+    border: 1px solid #EBEBEB;
+    border-radius: 3px;
+    padding: 12px 14px;
+    width: fit-content;
+    justify-content: space-between;
+    &__wrap {
+        min-width: 200px;
+        display: flex;
+        justify-content: space-between;
+    }
+    &__item {
+        margin-right: 18px;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 19px;
+        color: #C4C4C4;
+        text-decoration: none;
+        &--no-mr {
+            margin-right: 0;
+        }
+        &--prew {
+            margin-right: 18px;
+            &:hover {
+                path {
+                    fill: #EF5B70;
+                }
+            }
+        }
+        &--next {
+            margin-left: 16px;
+            margin-right: 0;
+            &:hover {
+                path {
+                    fill: #EF5B70;
+                }
+            }
+        }
+        &--active {
+            color: #EF5B70;
+        }
+        &:hover {
+            color: #EF5B70;
+        }
+    }
+}

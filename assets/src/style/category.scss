@@ -1,48 +1,99 @@
-.categories {
-    display: flex;
-    flex-wrap: wrap;
-    padding-top: 64px;
-    justify-content: space-between;
-    margin-bottom: 96px;
-}
-
-.category {
-    width: 360px;
-    display: flex;
-    margin-bottom: 31px;
-    padding: 106px 103px;
-    background-color: #C4C4C4;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    &--women {
-        background-image: url(../img/women.jpg);
+    .categories {
+        display: flex;
+        flex-wrap: wrap;
+        padding-top: 65px;
+        padding-bottom: 35px;
+        justify-content: space-between;
     }
-    &--men {
-        background-image: url(../img/men.jpg);
-    }
-    &--kids {
-        background-image: url(../img/kids.jpg);
-    }
-    &--acces {
-        background-image: url(../img/acces.jpg);
-        width: 100%;
-        padding: 65px 0;
-    }
-    &__name {
-        margin: auto;
-        font-size: 16px;
-        line-height: 19px;
-        text-align: center;
-        color: #ffffff;
-        font-style: normal;
-        font-weight: normal;
-        span {
+    
+    .category {
+        width: 360px;
+        display: flex;
+        margin-bottom: 30px;
+        padding: 106px 103px;
+        background-color: #C4C4C4;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        background-color: rgba(33, 22, 22, 0.7);
+        background-blend-mode: darken;
+        &--women {
+            background-image: url(../img/category/category-women.jpg);
+        }
+        &--men {
+            background-image: url(../img/category/category-men.jpg);
+        }
+        &--kids {
+            background-image: url(../img/category/category-kids.jpg);
+        }
+        &--acces {
+            background-image: url(../img/category/category-acces.jpg);
+            width: 100%;
+            padding: 66px 0;
+        }
+        &__link {
+            text-align: center;
             display: block;
-            font-weight: bold;
-            font-size: 24px;
-            line-height: 29px;
-            color: #F16D7F;
+            margin: 0 auto;
+            text-decoration: none;
+        }
+        &__name {
+            margin: auto;
+            font-size: 16px;
+            line-height: 19px;
+            text-align: center;
+            color: #ffffff;
+            font-style: normal;
+            font-weight: normal;
+            text-transform: uppercase;
+            span {
+                display: block;
+                font-weight: bold;
+                font-size: 24px;
+                line-height: 29px;
+                color: #F16D7F;
+            }
         }
     }
-}
+    
+    @media (max-width: 1200px) {
+        .categories {
+            padding-top: 20px;
+        }
+        .category {
+            width: 232px;
+            padding: 60px 0;
+            margin-bottom: 19px;
+            &--acces {
+                width: 100%;
+                padding: 34px 0;
+            }
+        }
+    }
+    
+    @media (max-width: 767px) {
+        .categories {
+            padding-top: 64px;
+            padding-bottom: 0px;
+        }
+        .category {
+            width: 100%;
+            padding: 100px 0;
+            margin-bottom: 31px;
+            &--acces {
+                width: 100%;
+                padding: 34px 0;
+            }
+        }
+    }
+    
+    // @media (max-width: 375px) {
+    //     .category {
+    //         width: 100%;
+    //         padding: 59px 0;
+    //         &--acces {
+    //             width: 100%;
+    //             padding: 33px 0;
+    //         }
+    //     }
+    // }

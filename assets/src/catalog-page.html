@@ -1,0 +1,12 @@
+@@include('_head.html', {"title": "catalog-page"})
+
+
+<body>
+    @@include('_header.html')
+    <main class="content">
+        @@include('_page-head.html', {"h1":"new arrivals", "breadcrumbs": true})
+        <div class="container">
+            @@include('_filter.html') @@include('_products-list.html') @@include('_pagination.html')
+        </div>
+    </main>
+    @@include('_advantages.html') @@include('_footer.html')

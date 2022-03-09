@@ -1,0 +1,144 @@
+.content {
+    &__wrap {
+        display: grid;
+        grid-template-columns: 360px auto;
+        grid-column-gap: 22px;
+        justify-content: space-between;
+        padding: 64px 0 96px;
+    }
+}
+
+.registration {
+    width: 358px;
+    &__block-name {
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 19px;
+        color: #222222;
+        margin-bottom: 20px;
+    }
+    &__input {
+        width: 100%;
+        border: 1px solid #A4A4A4;
+        padding: 13px 17px;
+        font-weight: 300;
+        font-size: 13px;
+        line-height: 16px;
+        color: #222222;
+        margin-bottom: 20px;
+        &::placeholder {
+            color: #B1B1B1;
+        }
+    }
+    &__block {
+        margin-bottom: 10px;
+    }
+    &__checkbox-wrap {
+        display: flex;
+        margin-bottom: 33px;
+    }
+    &__checkbox {
+        margin-right: 20px;
+        label {
+            display: flex;
+            align-items: center;
+            &::before {
+                width: 15px;
+                height: 15px;
+                display: block;
+                content: "";
+                outline: 1px solid #A4A4A4;
+                border: 2px solid #ffffff;
+                background-color: #ffffff;
+                border-radius: 50%;
+                margin-right: 20px;
+            }
+        }
+        input[type="radio"] {
+            display: none;
+            &:checked~label::before {
+                background-color: #f16d7f;
+            }
+        }
+    }
+    &__text {
+        font-weight: 300;
+        font-size: 13px;
+        line-height: 16px;
+        color: #B1B1B1;
+        margin-bottom: 30px
+    }
+    &__button {
+        @include button-style(#ffffff, #F16D7F, none, #e05c6e, #bd0f26, #bd0f26, #ffffff);
+        font-size: 14px;
+        line-height: 17px;
+        svg {
+            margin-left: 20px;
+        }
+    }
+}
+
+.loyalty {
+    color: #000000;
+    max-width: 652px;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 29px;
+    &__header {
+        text-transform: uppercase;
+        margin-bottom: 22px;
+    }
+    &__text {
+        margin-bottom: 21px;
+    }
+    &__list-item {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        margin-bottom: 14px;
+        &::before {
+            flex-shrink: 0;
+            display: block;
+            content: "";
+            width: 20px;
+            height: 16px;
+            margin-right: 22px;
+            background-image: url(../img/check.svg);
+        }
+    }
+}
+
+@media (max-width:1200px) {
+    .content {
+        &__wrap {
+            padding: 41px 0 96px;
+        }
+    }
+    .loyalty {
+        max-width: 100%;
+        font-size: 16px;
+        line-height: 19px;
+        &__header {
+            margin-bottom: 32px;
+        }
+        &__text {
+            margin-bottom: 21px;
+        }
+        &__list-item {
+            margin-bottom: 22px;
+        }
+    }
+}
+
+@media (max-width:767px) {
+    .content {
+        &__wrap {
+            display: block;
+        }
+    }
+    .registration {
+        margin-bottom: 40px;
+        width: 100%;
+        min-width: 358px;
+    }
+}

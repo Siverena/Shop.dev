@@ -169,6 +169,10 @@ a {
     font-size: 100%;
     vertical-align: baseline;
     background: transparent;
+    &:hover {
+        color: inherit;
+        text-decoration: none;
+    }
 }
 
 del {
